@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #222;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #4e8eff; /* Light blue */
+            font-family: 'Ubuntu Mono', monospace;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(78, 142, 255, 0.7);
+            }
+            70% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 15px rgba(78, 142, 255, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(78, 142, 255, 0);
+            }
+        }
+        
+        #loading-text {
+            font-family: 'Ubuntu Mono', monospace;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        #created-by {
+            font-family: 'Ubuntu Mono', monospace;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <div style="font-size: 24px; margin-bottom: 10px;">
+            Apollo Emulator V1
+        </div>
+        <div id="created-by">
+            Created by Fierce
+        </div>
+        <div id="loading-text">Loading Game: Sonic The Hedgehog</div>
+    </div>
+    <div id="game"></div>
+    <script>
+        window.onload = function() {
+            const display = document.getElementById('game');
+            display.focus();
+        };
+        setTimeout(function() {
+            const infoDiv = document.getElementById("info");
+            infoDiv.style.opacity = 0;
+
+            // Remove after fading out
+            setTimeout(function() {
+                infoDiv.remove();
+            }, 1000);
+        }, 4500);
+    </script>
+    <script>
+        game.addEventListener("keydown", function(e) { 
+            if(["ArrowUp","ArrowDown"].indexOf(e.code) > -1) { 
+                e.preventDefault(); 
+            } 
+        }, false);
+    </script>
+    <script>
+        setTimeout(function() {
+            EJS_player = '#game';
+            EJS_gameUrl = 'roms/sonic.md'; // Url to Game rom
+            EJS_core = 'segaMD';
+            EJS_pathtodata = 'data/';
+            EJS_biosUrl = '';     // Url to Famicom Disk System bios
+            EJS_lightgun = false; // NES Lightgun
+            EJS_mouse = false;    // SNES Mouse
+            EJS_multitap = false; // SNES Multitap
+            const script = document.createElement('script');
+            script.src = "data/loader.js";
+            document.body.appendChild(script);
+            
+            // Remove loading text
+            const loadingText = document.getElementById('loading-text');
+            loadingText.style.display = 'none';
+        }, 4500);
+    </script>
+</body>
+</html>
